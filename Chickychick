@@ -4,44 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Egg Picker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Nunito+Sans:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Comic Sans MS', sans-serif;
-            background-color: #f5f5f5;
-            text-align: center;
+            font-family: 'Nunito Sans', sans-serif;
+            background-color: #fdf6f0; /* Soft cream background */
+            color: #444; /* Neutral dark gray text */
             margin: 0;
             padding: 0;
+            text-align: center;
+            background-image: url('https://www.transparenttextures.com/patterns/cotton-squares.png');
+            background-size: cover;
         }
         .container {
-            margin-top: 50px;
+            margin-top: 60px;
+            padding: 20px;
         }
         h1 {
+            font-family: 'Playfair Display', serif;
             font-size: 3em;
-            color: #ff4d88;
+            color: #d85b5b; /* Elegant soft pink */
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+        h2 {
+            font-size: 2em;
+            color: #6b8e23; /* Olive green for a farm-like vibe */
+            margin-bottom: 20px;
+        }
+        .message {
+            font-size: 1.5em;
+            color: #f1c40f; /* Warm yellow text */
+            margin-top: 30px;
         }
         button {
             font-size: 1.5em;
-            padding: 10px 20px;
+            padding: 12px 30px;
             margin: 20px;
             border: none;
             cursor: pointer;
-            border-radius: 10px;
+            border-radius: 20px;
+            background-color: #ffb3b3; /* Soft pink */
+            color: #fff;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #d85b5b; /* Slightly darker pink on hover */
         }
         .balot {
-            background-color: #ffcc00;
+            background-color: #ffb3b3;
         }
         .penoy {
-            background-color: #ff6666;
+            background-color: #f1c40f; /* Light yellow for Penoy */
         }
         img {
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
             margin-top: 20px;
-        }
-        .message {
-            font-size: 2em;
-            color: #66ccff;
-            margin-top: 50px;
+            border-radius: 50%;
+            border: 4px solid #fff; /* Soft white border around the images */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         .confetti {
             position: fixed;
@@ -51,19 +73,24 @@
             bottom: 0;
             z-index: -1;
         }
+        .farm-elements {
+            margin-top: 30px;
+            font-size: 1.2em;
+            color: #d85b5b;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <!-- Welcome Page -->
         <div id="welcomePage">
-            <h1>Hi 🤗 Welcome</h1>
+            <h1>Hi 🤗 Welcome to the Farm</h1>
             <button onclick="goToChoice()">Next</button>
         </div>
 
         <!-- Choice Page -->
         <div id="choicePage" style="display: none;">
-            <h1>Choose your fighter</h1>
+            <h2>Choose your fighter 🐣</h2>
             <button class="balot" onclick="chooseBalot()">Balot</button>
             <button class="penoy" onclick="choosePenoy()">Penoy</button>
         </div>
@@ -72,6 +99,7 @@
         <div id="thankYouPage" style="display: none;">
             <h1 class="message" id="thankYouMessage">Thank you for choosing, meet me at the right place, and next time choose me!</h1>
             <img id="finalImage" src="" alt="Thank you image">
+            <div class="farm-elements">🐥 Chicks and eggs are waiting for you!</div>
         </div>
     </div>
 
