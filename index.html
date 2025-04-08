@@ -1,175 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Balot or Penoy?</title>
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    body {
-      background: linear-gradient(to bottom, #ffebf2, #f0f8ff);
-      font-family: 'Fredoka', sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      height: 100vh;
-      margin: 0;
-      padding: 20px;
-      overflow: hidden;
-    }
-
-    h1 {
-      font-family: 'Pacifico', cursive;
-      color: #ff1493;
-      font-size: 3rem;
-      margin-bottom: 20px;
-    }
-
-    .button-container {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-      margin-bottom: 30px;
-    }
-
-    button {
-      padding: 15px 30px;
-      font-size: 1.3rem;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-
-    .balot {
-      background-color: #ff66b2;
-      color: #fff;
-    }
-
-    .penoy {
-      background-color: #a28ee4;
-      color: #fff;
-    }
-
-    button:hover {
-      transform: scale(1.1);
-      opacity: 0.9;
-    }
-
-    .result {
-      margin-top: 20px;
-      text-align: center;
-    }
-
-    .result img {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
-      margin-top: 15px;
-      animation: bounce 1s infinite alternate;
-    }
-
-    .message {
-      margin-top: 10px;
-      font-size: 1.2rem;
-      color: #e91e63;
-      font-weight: bold;
-      max-width: 300px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    @keyframes bounce {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(-10px); }
-    }
-
-    .confetti {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      pointer-events: none;
-      z-index: 999;
-      overflow: hidden;
-    }
-
-    .confetti div {
-      position: absolute;
-      background-color: #ff1493;
-      width: 10px;
-      height: 10px;
-      animation: confetti 1s linear infinite;
-    }
-
-    @keyframes confetti {
-      0% { transform: translateY(0) rotate(0deg); }
-      100% { transform: translateY(100vh) rotate(360deg); }
-    }
-
-    audio {
-      display: none;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Egg Picker</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', sans-serif;
+            background-color: #f5f5f5;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        h1 {
+            font-size: 3em;
+            color: #ff4d88;
+        }
+        button {
+            font-size: 1.5em;
+            padding: 10px 20px;
+            margin: 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        .balot {
+            background-color: #ffcc00;
+        }
+        .penoy {
+            background-color: #ff6666;
+        }
+        img {
+            width: 100px;
+            height: 100px;
+            margin-top: 20px;
+        }
+        .message {
+            font-size: 2em;
+            color: #66ccff;
+            margin-top: 50px;
+        }
+        .confetti {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+        }
+    </style>
 </head>
 <body>
-  <h1>Which egg are you, Irish?</h1>
+    <div class="container">
+        <!-- Welcome Page -->
+        <div id="welcomePage">
+            <h1>Hi 🤗 Welcome</h1>
+            <button onclick="goToChoice()">Next</button>
+        </div>
 
-  <div class="button-container">
-    <button class="balot" onclick="pick('Balot')">Balot</button>
-    <button class="penoy" onclick="pick('Penoy')">Penoy</button>
-  </div>
+        <!-- Choice Page -->
+        <div id="choicePage" style="display: none;">
+            <h1>Choose your fighter</h1>
+            <button class="balot" onclick="chooseBalot()">Balot</button>
+            <button class="penoy" onclick="choosePenoy()">Penoy</button>
+        </div>
 
-  <div class="result" id="result"></div>
+        <!-- Thank You Page -->
+        <div id="thankYouPage" style="display: none;">
+            <h1 class="message" id="thankYouMessage">Thank you for choosing, meet me at the right place, and next time choose me!</h1>
+            <img id="finalImage" src="" alt="Thank you image">
+        </div>
+    </div>
 
-  <!-- Background Music -->
-  <audio id="bgMusic" autoplay loop>
-    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_4fc27229c9.mp3?filename=chill-music-11098.mp3" type="audio/mpeg">
-  </audio>
+    <!-- Confetti Effect -->
+    <div class="confetti" id="confetti"></div>
 
-  <div class="confetti" id="confetti"></div>
+    <script>
+        function goToChoice() {
+            document.getElementById('welcomePage').style.display = 'none';
+            document.getElementById('choicePage').style.display = 'block';
+        }
 
-  <script>
-    function pick(choice) {
-      const resultDiv = document.getElementById('result');
-      const confettiDiv = document.getElementById('confetti');
-      let imgSrc = '';
-      let message = '';
+        function chooseBalot() {
+            document.getElementById('choicePage').style.display = 'none';
+            document.getElementById('thankYouPage').style.display = 'block';
+            document.getElementById('thankYouMessage').textContent = 'Thank you for choosing Balot, meet me at the right place, and next time choose me!';
+            document.getElementById('finalImage').src = 'https://www.example.com/chick-image.jpg'; // Replace with your chick image URL
+            triggerConfetti();
+        }
 
-      if (choice === 'Balot') {
-        imgSrc = 'https://images.unsplash.com/photo-1608039755400-e87e222dc899?auto=format&fit=crop&w=200&q=80';
-        message = "You're full of surprises, just like a Balot! ❤️";
-      } else {
-        imgSrc = 'https://images.unsplash.com/photo-1585238341984-01704f9c35d4?auto=format&fit=crop&w=200&q=80';
-        message = "You're sweet and comforting, just like a Penoy! 💖";
-      }
+        function choosePenoy() {
+            document.getElementById('choicePage').style.display = 'none';
+            document.getElementById('thankYouPage').style.display = 'block';
+            document.getElementById('thankYouMessage').textContent = 'Thank you for choosing Penoy, meet me at the right place, and next time choose me!';
+            document.getElementById('finalImage').src = 'https://www.example.com/egg-image.jpg'; // Replace with your egg image URL
+            triggerConfetti();
+        }
 
-      resultDiv.innerHTML = `
-        <h2>You picked: ${choice}, Irish!</h2>
-        <img src="${imgSrc}" alt="${choice}">
-        <div class="message">${message}</div>
-      `;
+        function triggerConfetti() {
+            const confettiElement = document.getElementById('confetti');
+            confettiElement.innerHTML = '<canvas id="confettiCanvas"></canvas>';
 
-      // Confetti effect
-      for (let i = 0; i < 100; i++) {
-        let confettiPiece = document.createElement('div');
-        confettiPiece.style.left = Math.random() * 100 + 'vw';
-        confettiPiece.style.animationDuration = (Math.random() * 2 + 2) + 's';
-        confettiPiece.style.animationDelay = (Math.random() * 2) + 's';
-        confettiDiv.appendChild(confettiPiece);
-      }
-    }
+            const canvas = document.getElementById('confettiCanvas');
+            const ctx = canvas.getContext('2d');
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
 
-    // Start music on user interaction (mobile-friendly)
-    window.addEventListener('click', () => {
-      const music = document.getElementById('bgMusic');
-      music.play().catch(() => {});
-    }, { once: true });
-  </script>
+            const colors = ['#ff4d88', '#ffcc00', '#66ccff', '#ff6666', '#f5a623'];
+
+            function createConfetti() {
+                const x = Math.random() * width;
+                const y = Math.random() * height;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                ctx.fillStyle = color;
+                ctx.beginPath();
+                ctx.arc(x, y, 5 + Math.random() * 5, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            setInterval(createConfetti, 20);
+        }
+    </script>
 </body>
 </html>
